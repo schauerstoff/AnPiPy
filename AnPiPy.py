@@ -28,6 +28,8 @@ PATH = "C:\Program Files (x86)\chromedriver.exe"
 
 class Chrome:
     driver = None
+    # last resort: batch to change the name of files while downloading
+    batch = 0
 
     def setup_chrome(self):
         # make error go away :-)
@@ -40,6 +42,7 @@ class Chrome:
 
     # downlds only vorschaubilder, so 200x200 px. evtl aendern?
     def download_images(self, word):
+        self.batch += 1
         self.driver.find_element_by_name('q').clear()
         search_field = self.driver.find_element_by_name('q')
         search_field.send_keys(word)
@@ -48,7 +51,7 @@ class Chrome:
             img = self.driver.find_element_by_xpath(
                 '//*[@id="islrg"]/div[1]/div[' + str(i) + ']/a[1]/div[1]/img')  # str(i) gets the ith pic on page from i = 1 up to i = 20
             src = img.get_attribute('src')
-            name = "pics/Pic" + str(i) + ".png"
+            name = "pics/Pic" + str(i) + str(self.batch) + ".png"
             urllib.request.urlretrieve(src, name)
 
 
@@ -108,11 +111,13 @@ class Ui_MainWindow(object):
             self.fill_images()
 
     def next_word(self, pos):
+        self.data.lang = Language.JAP
         if (pos < 100):  # needs to be updatetd lo list length
             self.data.pos += 1
         self.load_word(self.data.pos)
 
     def prev_word(self, pos):
+        self.data.lang = Language.JAP
         if (pos > 0):
             self.data.pos -= 1
             self.load_word(self.data.pos)
@@ -405,11 +410,10 @@ class Ui_MainWindow(object):
     # new
     def fill_images(self):
         for i in range(len(self.allPics)):
-            path = "pics/Pic" + str(i+1)
-            self.allPics[i].clear()
+            path = "pics/Pic" + str(i+1) + str(self.chrome.batch)
             self.allPics[i].setPixmap(QtGui.QPixmap(path))
-            time.sleep(0.05)
-            self.app.processEvents()
+            # time.sleep(0.05)
+            # self.app.processEvents()
         # self.app.processEvents()  # process all the events present on the queue
 
     def send_to_clipboard(self, image_path):
