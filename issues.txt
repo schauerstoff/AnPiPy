@@ -1,0 +1,11 @@
+# idee: entferne aus der liste sobald einmal copy gedrückt wurde
+# idee show wie viele noch left sind in der liste
+#lade direkt neues wort wenn copy gedrückt wurde
+#gui remake
+#more customizable: select excel columns, path for chromedriver
+#write/draw manual
+#publish
+#language switch with radio buttons rather than buttons
+#add serial number seriously
+
+#test
