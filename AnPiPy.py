@@ -19,8 +19,11 @@ from selenium.webdriver.common.keys import Keys
 from openpyxl import load_workbook
 import urllib.request
 
+# change paths here
 path = "C:\Program Files (x86)\chromedriver.exe"
 pic_path = "C:\_schauerstoff\git\AnPiPy\pics"
+xlsx_file = 'Mappe3.xlsx'
+worksheet_name = 'testdata3'
 
 
 class Chrome:
@@ -68,8 +71,9 @@ class Data:
 
     def setup_data(self):
         # Read in xlsx with Kanji in first and English in 4th row
-        wb = load_workbook("Mappe2.xlsx")
-        ws = wb['testdata2']
+
+        wb = load_workbook(xlsx_file)
+        ws = wb[worksheet_name]
         column = ws['A']
         self.japanese = [column[x].value for x in range(
             1, len(column))]  # 0. entry is "column 1"
