@@ -20,10 +20,10 @@ from openpyxl import load_workbook
 import urllib.request
 
 # change paths here
-path = "C:\Program Files (x86)\chromedriver.exe"
+path = "C:\_schauerstoff\japanese\chromedriver.exe"
 pic_path = "C:\_schauerstoff\git\AnPiPy\pics"
-xlsx_file = 'Mappe3.xlsx'
-worksheet_name = 'testdata3'
+xlsx_file = '\data\SummerMemories1.xlsx'
+worksheet_name = 'summermemories'
 
 
 class Chrome:
@@ -36,7 +36,7 @@ class Chrome:
         options = webdriver.ChromeOptions()
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         # kein chrome fenster wird geoeffnet
-        options.add_argument("--headless")
+        #options.add_argument("--headless")
         self.driver = webdriver.Chrome(path, options=options)
         self.driver.get('https://www.google.de/imghp?hl=de')
 
